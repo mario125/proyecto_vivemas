@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dbf21131fd5349fca6db13d9f4df7632" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="vivemas_dbModel.datosusuarios" Width="1.5" PointX="5.25" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="vivemas_dbModel.roles" Width="1.5" PointX="5.25" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="vivemas_dbModel.usuarios" Width="1.5" PointX="7.5" PointY="35" IsExpanded="true" />
+        <AssociationConnector Association="vivemas_dbModel.FK_USUARIOS_DATOSUSUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="vivemas_dbModel.FK_USUARIOS_ROLES" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="vivemas_dbModel.empresas" Width="1.5" PointX="3" PointY="37.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.lotes" Width="1.5" PointX="10.5" PointY="40.375" />
+        <EntityTypeShape EntityType="vivemas_dbModel.proyectos" Width="1.5" PointX="5.25" PointY="40.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposdocumentoidentidad" Width="1.5" PointX="0.75" PointY="39.625" />
+        <AssociationConnector Association="vivemas_dbModel.FK_empresas_tiposdocumentoidentidad" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proyectos_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_lotes_proyectos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_roles_empresas" />
+        <EntityTypeShape EntityType="vivemas_dbModel.coordenadaslotes" Width="1.5" PointX="12.75" PointY="65.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_coordenadaslotes_lotes" />
+        <EntityTypeShape EntityType="vivemas_dbModel.canalescontacto" Width="1.5" PointX="10.5" PointY="28.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.departamentos" Width="1.5" PointX="1.125" PointY="0.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.distritos" Width="1.5" PointX="10.5" PointY="31.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadoscaptacioncliente" Width="1.5" PointX="10.5" PointY="57.125" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadoscivil" Width="1.5" PointX="10.5" PointY="54.375" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadosproceso" Width="1.5" PointX="10.5" PointY="22.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.interesesclienteproyecto" Width="1.5" PointX="7.5" PointY="43.5" />
+        <EntityTypeShape EntityType="vivemas_dbModel.medioscontacto" Width="1.5" PointX="8.25" PointY="28.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.monedas" Width="1.5" PointX="13.5" PointY="22.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.provincias" Width="1.5" PointX="4" PointY="0.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tipospersona" Width="1.5" PointX="10.5" PointY="25.5" />
+        <EntityTypeShape EntityType="vivemas_dbModel.titulares" Width="1.5" PointX="5.25" PointY="47" />
+        <AssociationConnector Association="vivemas_dbModel.FK_canalescontacto_medioscontacto" />
+        <AssociationConnector Association="vivemas_dbModel.FK_provincias_departamentos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_titulares_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_interesesclienteproyecto_proyectos" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadosseparacion" Width="1.5" PointX="15.75" PointY="56" />
+        <EntityTypeShape EntityType="vivemas_dbModel.bancos" Width="1.5" PointX="13.5" PointY="26.25" />
+        <EntityTypeShape EntityType="vivemas_dbModel.cuentasbanco" Width="1.5" PointX="15.75" PointY="24.25" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadoslote" Width="1.5" PointX="8.25" PointY="46.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposcambio" Width="1.5" PointX="15.75" PointY="20.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposmetodopago" Width="1.5" PointX="15.75" PointY="30" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposmoneda" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cuentasbanco_bancos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cuentasbanco_monedas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_lotes_estadoslote" />
+        <EntityTypeShape EntityType="vivemas_dbModel.clientes" Width="1.5" PointX="12.75" PointY="35.125" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadosinterescliente" Width="1.5" PointX="10.5" PointY="59.625" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_canalescontacto" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_distritos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_estadoscaptacioncliente" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_estadoscivil" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_estadosinterescliente" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_estadosproceso" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_tiposdocumentoidentidad" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_tipospersona" />
+        <AssociationConnector Association="vivemas_dbModel.FK_clientes_usuariospromotor" />
+        <AssociationConnector Association="vivemas_dbModel.FK_interesesclienteproyecto_clientes" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadostransaccion" Width="1.5" PointX="15.75" PointY="51.125" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposmovimiento" Width="1.5" PointX="15.75" PointY="53.5" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tipostransaccion" Width="1.5" PointX="15.75" PointY="48.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.transacciones" Width="2" PointX="18" PointY="27.625" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_cuentasbanco" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_estadostransaccion" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_tiposmetodopago" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_tiposmovimiento" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_tipostransaccion" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_monedas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_tiposcambio" />
+        <EntityTypeShape EntityType="vivemas_dbModel.anexoscontratocotizacion" Width="1.5" PointX="17.25" PointY="43.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.anexoscontratoproforma" Width="1.5" PointX="23.25" PointY="39.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.cotizaciones" Width="1.5" PointX="15" PointY="36.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.cuotas" Width="1.5" PointX="19.5" PointY="47" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadoscontrato" Width="1.5" PointX="5.25" PointY="22.25" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadosuif" Width="1.5" PointX="18.75" PointY="54.25" />
+        <EntityTypeShape EntityType="vivemas_dbModel.pagos" Width="1.5" PointX="25.75" PointY="39.25" />
+        <EntityTypeShape EntityType="vivemas_dbModel.proformascontrato" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tipospropietario" Width="1.5" PointX="21" PointY="52" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tipossociedad" Width="1.5" PointX="18.75" PointY="51.875" />
+        <AssociationConnector Association="vivemas_dbModel.FK_anexoscontratocotizacion_cotizaciones" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cuotas_anexoscontratocotizacion" />
+        <AssociationConnector Association="vivemas_dbModel.FK_pagos_cuotas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_pagos_transacciones" />
+        <AssociationConnector Association="vivemas_dbModel.FK_anexoscontratoproforma_tipospropietario" />
+        <EntityTypeShape EntityType="vivemas_dbModel.configuraciones" Width="1.5" PointX="5.25" PointY="29.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_configuraciones_empresas" />
+        <EntityTypeShape EntityType="vivemas_dbModel.separaciones" Width="1.5" PointX="18" PointY="38.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.transaccionesseparacion" Width="1.5" PointX="20.75" PointY="31.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_separaciones_clientes" />
+        <AssociationConnector Association="vivemas_dbModel.FK_separaciones_estadosseparacion" />
+        <AssociationConnector Association="vivemas_dbModel.FK_separaciones_lotes" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transaccionesseparacion_separaciones" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transaccionesseparacion_transacciones" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadosdocumento" Width="1.5" PointX="21.5" PointY="29.25" />
+        <EntityTypeShape EntityType="vivemas_dbModel.series" Width="1.5" PointX="8.25" PointY="39.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposdocumentoventa" Width="1.5" PointX="21.5" PointY="25.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_series_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_series_tiposdocumentoventa" />
+        <EntityTypeShape EntityType="vivemas_dbModel.documentosventa" Width="1.5" PointX="23.75" PointY="27.375" />
+        <EntityTypeShape EntityType="vivemas_dbModel.documentosventadetalle" Width="1.5" PointX="26" PointY="43.875" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventa_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventa_estadosdocumento" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventa_monedas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventa_tiposdocumentoventa" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventa_tiposmetodopago" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventa_transacciones" />
+        <AssociationConnector Association="vivemas_dbModel.FK_documentosventadetalle_documentosventa" />
+        <EntityTypeShape EntityType="vivemas_dbModel.vw_cargarClientesContrato" Width="1.5" PointX="4.75" PointY="3.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cotizaciones_clientes" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cotizaciones_lotes" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cotizaciones_monedas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cotizaciones_promotores" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cotizaciones_proyectos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_cotizaciones_tiposcambio" />
+        <EntityTypeShape EntityType="vivemas_dbModel.vw_busquedaContratosAutocomplete" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.proformasuif" Width="1.5" PointX="21" PointY="36.375" />
+        <AssociationConnector Association="vivemas_dbModel.FK_anexoscontratoproforma_proformasuif" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_clientes" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_estadoscivil" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_estadosuif" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_lotes" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_tiposdocumentoidentidad" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_tipossociedad" />
+        <AssociationConnector Association="vivemas_dbModel.FK_proformasuif_transacciones" />
+        <EntityTypeShape EntityType="vivemas_dbModel.notascredito" Width="1.5" PointX="28" PointY="30.375" />
+        <EntityTypeShape EntityType="vivemas_dbModel.notascreditodetalle" Width="1.5" PointX="30.25" PointY="33.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposnotacredito" Width="1.5" PointX="25.75" PointY="24.75" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascredito_documentosventa" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascredito_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascredito_estadosdocumento" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascredito_monedas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascredito_tiposdocumentoventa" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascredito_tiposnotacredito" />
+        <AssociationConnector Association="vivemas_dbModel.FK_notascreditodetalle_notascredito" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposcontacto" Width="1.5" PointX="12.75" PointY="32" />
+        <EntityTypeShape EntityType="vivemas_dbModel.estadosevento" Width="1.5" PointX="7.5" PointY="31.875" />
+        <EntityTypeShape EntityType="vivemas_dbModel.eventostipocontacto" Width="1.5" PointX="15" PointY="33.875" />
+        <AssociationConnector Association="vivemas_dbModel.FK_eventostipocontacto_tiposcontacto" />
+        <EntityTypeShape EntityType="vivemas_dbModel.eventos" Width="1.5" PointX="9.75" PointY="35" />
+        <AssociationConnector Association="vivemas_dbModel.FK_eventos_estadosevento" />
+        <AssociationConnector Association="vivemas_dbModel.FK_eventos_usuarios" />
+        <AssociationConnector Association="vivemas_dbModel.FK_eventostipocontacto_eventos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_transacciones_eventos" />
+        <EntityTypeShape EntityType="vivemas_dbModel.datosencuesta" Width="1.5" PointX="7.5" PointY="52.625" />
+        <EntityTypeShape EntityType="vivemas_dbModel.encuestas" Width="1.5" PointX="12" PointY="51.125" />
+        <EntityTypeShape EntityType="vivemas_dbModel.preguntas" Width="1.5" PointX="7.5" PointY="49.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.respuestas" Width="1.5" PointX="9.75" PointY="49.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.tiposencuesta" Width="1.5" PointX="5.25" PointY="51.25" />
+        <AssociationConnector Association="vivemas_dbModel.FK_datosencuesta_tiposencuesta" />
+        <AssociationConnector Association="vivemas_dbModel.FK_encuestas_datosencuesta" />
+        <AssociationConnector Association="vivemas_dbModel.FK_encuestas_empresas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_encuestas_preguntas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_encuestas_respuestas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_preguntas_encuestas" />
+        <AssociationConnector Association="vivemas_dbModel.FK_respuestas_preguntas" />
+        <EntityTypeShape EntityType="vivemas_dbModel.vw_cargarEventos" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.vw_reporteVentas" Width="2.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="vivemas_dbModel.contratos" Width="1.5" PointX="7.5" PointY="21.25" />
+        <AssociationConnector Association="vivemas_dbModel.FK_anexoscontratocotizacion_contratos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_anexoscontratoproforma_contratos" />
+        <AssociationConnector Association="vivemas_dbModel.FK_contratos_estadoscontrato" />
+        <AssociationConnector Association="vivemas_dbModel.FK_eventos_contratos" />
+        <EntityTypeShape EntityType="vivemas_dbModel.vw_reporteeventos" Width="1.5" PointX="3.75" PointY="7.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

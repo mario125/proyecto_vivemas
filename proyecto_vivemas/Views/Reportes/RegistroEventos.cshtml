@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Planificador";
+}
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link href="~/Content/fullcalendar/css/main.min.css" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Planificador
+            </div>
+            <div class="card-body">
+                <div id='calendar'></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalEventos" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form id="formEventos">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Evento</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="inputFechaInicio" />
+                    <input type="hidden" id="inputFechaFin" />
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="inputDescripcion">Nombre/Razon Social</label>
+                                <input type="text" id="inputDescripcion" class="form-control" name="inputDescripcion" placeholder="Descripcion Evento" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonCrearEvento" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonCerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/fullcalendar/js/main.min.js"></script>
+    <script src="~/Content/fullcalendar/js/locales-all.min.js"></script>
+    <script src="~/Scripts/Reportes/RegistroEventos.js"></script>
+}

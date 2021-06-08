@@ -1,0 +1,292 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Separaciones";
+}
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Separaciones
+            </div>
+            <div class="card-body">
+                <div class="row form-group">
+                    <div class="col-3">                        
+                        <button type="button" id="buttonAbrirModalSeparaciones" class="btn btn-block btn-primary">Crear Separacion</button>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">                            
+                            <select id="selectEstadoSeparacion" class="form-control" name="selectEstadoSeparacion"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="tableSeparaciones"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalSeparaciones" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <form id="formSeparaciones">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="hTituloSeparaciones" class="modal-title">Realizar Separacion</h3>
+                </div>
+                <div class="modal-body contenedorSeparaciones">
+                    <input type="hidden" class="dataOculta" id="inputIdCliente" />
+                    <input type="hidden" class="dataOculta" id="inputIdLote" />
+                    <div id="accordion">
+                        <div class="card mb-0">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <a class="btn btn-link btn-block text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Datos del Cliente
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="selectTipoPersona">Tipo persona:</label>
+                                                <select id="selectTipoPersona" class="form-control" name="selectTipoPersona"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="selectTipoDocumento">Tipo Documento:</label>
+                                                <select id="selectTipoDocumento" class="form-control" name="selectTipoDocumento"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="inputNroDocumento">Nro Documento</label>
+                                                <input type="text" id="inputNroDocumento" class="form-control inputNroDocumento" name="inputNroDocumento" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="inputFechaVencimiento">Fecha Vencimiento(dias): </label>
+                                            <input type="text" id="inputFechaVencimiento" class="form-control" name="inputFechaVencimiento" autocomplete="off" value="6" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="inputNroContacto">Nro Contacto</label>
+                                                <input type="text" id="inputNroContacto" class="form-control" name="inputNroContacto" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label for="inputRazonSocial">Razon Social</label>
+                                                <input type="text" id="inputRazonSocial" class="form-control" name="inputRazonSocial" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="selectPromotor">Promotor:</label>
+                                                <select id="selectPromotor" class="form-control" name="selectPromotor"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="selectProyecto">Proyecto:</label>
+                                                <select id="selectProyecto" class="form-control" name="selectProyecto"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="selectLote">Lote:</label>
+                                                <select id="selectLote" class="form-control" name="selectLote"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="inputLoteArea">Area: </label>
+                                                <input type="text" id="inputLoteArea" class="form-control" name="inputLoteArea" autocomplete="off" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="inputLotePrecioMetro">Precio por metro: </label>
+                                                <input type="text" id="inputLotePrecioMetro" class="form-control" name="inputLotePrecioMetro" autocomplete="off" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="inputLotePrecio">Precio Lote: </label>
+                                                <input type="text" id="inputLotePrecio" class="form-control" name="inputLotePrecio" autocomplete="off" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-0">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <a class="btn btn-link btn-block text-left collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Datos de la Transaccion
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="selectMetodoPago">Metodo Pago:</label>
+                                                <select id="selectMetodoPago" class="form-control" name="selectMetodoPago"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputBancoOrigen">Banco Origen:</label>
+                                                <input type="text" id="inputBancoOrigen" class="form-control" name="inputBancoOrigen" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="selectBancoDestino">Banco Destino:</label>
+                                                <select id="selectBancoDestino" class="form-control" name="selectBancoDestino"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputNroSeparacion">Nro Separacion:</label>
+                                                <input type="text" id="inputNroSeparacion" class="form-control" name="inputNroSeparacion" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputNroOperacion">Nro Operacion:</label>
+                                                <input type="text" id="inputNroOperacion" class="form-control" name="inputNroOperacion" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="selectCtaDestino">Cuenta Destino:</label>
+                                                <select id="selectCtaDestino" class="form-control" name="selectCtaDestino"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="selectMoneda">Moneda:</label>
+                                                <select id="selectMoneda" class="form-control" name="selectMoneda"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputMonto">Monto:</label>
+                                                <input type="number" id="inputMonto" class="form-control" name="inputMonto" autocomplete="off" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonMostrarDetalle" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalActualizarLote" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="formActualizacionLote">
+                <div class="modal-header">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Actualizar Lote</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="inputSeparacionId" />
+                    <div class="row">
+                        <div class="col-10">
+                            <label for="selectProyectoActualizacion">Proyecto:</label>
+                            <select id="selectProyectoActualizacion" class="form-control" name="selectProyectoActualizacion"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="selectLoteActualizacion">Lote:</label>
+                                <select id="selectLoteActualizacion" class="form-control" name="selectLoteActualizacion"></select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputLoteAreaActualizacion">Area: </label>
+                                <input type="text" id="inputLoteAreaActualizacion" class="form-control" name="inputLoteAreaActualizacion" autocomplete="off" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputLotePrecioMetroActualizacion">Precio por metro: </label>
+                                <input type="text" id="inputLotePrecioMetroActualizacion" class="form-control" name="inputLotePrecioMetroActualizacion" autocomplete="off" disabled />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputLotePrecioActualizacion">Precio Lote: </label>
+                                <input type="text" id="inputLotePrecioActualizacion" class="form-control" name="inputLotePrecioActualizacion" autocomplete="off" disabled />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonActualizarLote" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonCerrarActualizarLote" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="modalDetalle" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-header">
+                    <h5 id="hTituloSeparaciones" class="modal-title">Detalles Separacion</h5>
+                </div>
+            </div>
+            <div class="modal-body ">
+                <dl class="row" id="dlDetalleSeparacion">
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="buttonCrearSeparacion" class="btn btn-primary">Guardar</button>
+                <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/Scripts/separaciones/Index.js"></script>
+}
+

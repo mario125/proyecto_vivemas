@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Reporte Ventas";
+}
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Reporte Ventas
+            </div>
+            <div class="card-body">
+                <form id="formReporteVentas">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">Proyecto:</label>
+                                <select class="form-control" id="selectProyecto"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputLote">Lote:</label>
+                                <input type="text" class="form-control" id="inputLote" placeholder="Lote">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputNroContrato">Nro Contrato:</label>
+                                <input type="text" class="form-control" id="inputNroContrato" placeholder="Nro Contrato">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-1">
+                                <label for="inputDocumentoCliente">Cliente:</label>
+                                <input type="text" class="form-control" id="inputDocumentoCliente" placeholder="Nro documento/Razon Social">
+                                <input type="hidden" id="inputIdContrato">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label style="color:white">-----------:</label>
+                                <button type="submit" class="btn btn-primary">Obtener Reporte</button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">desde:</label>
+                                <input type="date" class="form-control" id="inputFechaDesde">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">hasta:</label>
+                                <input type="date" class="form-control" id="inputFechaHasta">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <button type="button" class="btn btn-primary" id="buttonEmitirReportePDF" disabled>PDF</button>
+                                <button type="button" class="btn btn-success" id="buttonEmitirReporteXLS" disabled>EXCEL</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-responsive overflow-auto" style="max-height:500px">
+                    <table id="tableReporte" class="table table-bordered table-sm" data-cols-width="20,20,20,50,10,10,15">
+                        <thead id="theadReporte">
+                        </thead>
+                        <tbody id="tbodyReporte">
+                        </tbody>
+                        <tfoot id="tfootReporte">
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/Content/reporting/jspdf.min.js"></script>
+    <script src="~/Content/reporting/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/Content/reporting/tableToExcel.js"></script>
+    <script src="~/Content/reporting/FileSaver.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Reportes/ReporteVentas.js"></script>
+}

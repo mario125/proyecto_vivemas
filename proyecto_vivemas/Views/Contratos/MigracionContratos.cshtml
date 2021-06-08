@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Migracion de Contratos";
+}
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Migrador de contratos
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Migracion de contratos</label>
+                    <input type="file" class="form-control" id="inputArchivo" />
+                </div>
+                <div class="form-group">
+                    <button class="form-control" id="subirExcel">Migrar contrato</button>
+                </div>
+                <pre id="jsonData"></pre>
+
+                <hr />
+                <h4>Migracion clientes Casuarinas</h4>
+                <div class="form-group">
+                    <label>Migracion de contratos</label>
+                    <input type="file" class="form-control" id="inputArchivoClientes" />
+                </div>
+                <div class="form-group">
+                    <button class="form-control" id="subirExcelClientes">Migrar contrato</button>
+                </div>
+                <pre id="jsonDataClientes"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/xls/xlsx.full.min.js"></script>
+    <script src="~/Scripts/Contratos/MigracionContratos.js"></script>
+}

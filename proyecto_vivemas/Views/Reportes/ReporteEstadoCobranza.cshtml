@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Reporte Estado Cobranza";
+}
+
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Reporte Estado Cobranza
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <form id="formReporteEstadoCobranza">
+                        <div class="form-row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">Proyecto:</label>
+                                <select class="form-control" id="selectProyecto"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label style="color:white">-----------:</label>
+                                <button type="submit" class="btn btn-primary">Obtener Reporte</button>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <button type="button" class="btn btn-primary" id="buttonEmitirReportePDF" disabled>PDF</button>
+                                <button type="button" class="btn btn-success" id="buttonEmitirReporteXLS" disabled>EXCEL</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive overflow-auto" style="max-height:500px">
+                    <table id="tableReporte" class="table table-bordered table-sm" data-cols-width="30,10,20,50,50,10,20,20,20,20,20,20,20,20,20,20,20">
+                        <thead id="theadReporte">
+                            <tr> <th colspan="17" class="text-center table-info">REPORTE DE ESTADO DE COBRANZA</th></tr>                           
+                            <tr>
+                                <th rowspan="3" class="text-center table-info">PROYECTO</th>
+                                <th rowspan="3" class="text-center table-info">LOTE</th>
+                                <th rowspan="3" class="text-center table-info">NRO DOCUMENTO</th>
+                                <th rowspan="3" class="text-center table-info">CLIENTE</th>
+                                <th rowspan="3" class="text-center table-info">VENDEDOR</th>
+                                <th rowspan="3" class="text-center table-info">MONEDA</th>
+                                <th rowspan="3" class="text-center table-info">FECHA DE CONTRATO</th>
+                                <th rowspan="3" class="text-center table-info">CONTRATO</th>
+                                <th colspan="9" class="text-center table-info">ESTADO</th>
+                            </tr>
+                            <tr>
+                                <th colspan="5" class="text-center table-success">PAGADO</th>                                
+                                <th colspan="2" class="text-center table-danger">NO PAGADO</th>
+                                <th colspan="2" class="text-center table-warning">ANALISIS</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center table-success">CASH</th>
+                                <th class="text-center table-success">MONTO</th>
+                                <th class="text-center table-success">NRO LETRAS</th>
+                                <th class="text-center table-success">ULTIMO PAGO</th>
+                                <th class="text-center table-success">TOTAL</th>
+                                <th class="text-center table-danger">MONTO</th>
+                                <th class="text-center table-danger">NRO LETRAS</th>
+                                <th class="text-center table-warning">% PAGADO</th>
+                                <th class="text-center table-warning">DEVOLUCION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyReporte">
+                        </tbody>
+                        <tfoot id="tfootReporte">
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/Content/reporting/jspdf.min.js"></script>
+    <script src="~/Content/reporting/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/Content/reporting/tableToExcel.js"></script>
+    <script src="~/Content/reporting/FileSaver.min.js"></script>
+    <script src="~/Scripts/Reportes/reporteEstadoCobranza.js"></script>
+}

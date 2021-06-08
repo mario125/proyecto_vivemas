@@ -1,0 +1,205 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Pagos";
+}
+@section styles{
+    <link rel="stylesheet" href="~/Css/Cobranzas/pagos.css" />
+}
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Pagos
+            </div>
+            <div class="card-body">
+                <div class="row form-group">
+                    <div class="col-3">
+                        <input type="number" id="inputDocumento" class="form-control" placeholder="Buscar por documento" />
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="inputNombreCliente" class="form-control" placeholder="Buscar por nombre" />
+                    </div>
+                    <div class="col-3">
+                        <input type="number" id="inputCodigo" class="form-control" placeholder="Buscar por codigo" />
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="inputLote" class="form-control" placeholder="Buscar por lote" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="tablePagos"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalPagos" class="modal fade">
+    <div class="modal-dialog modal-lg" role="document">
+        <form id="formPagos">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTituloPagos" class="modal-title">Realizar Pago</h5>
+                </div>
+                <div class="modal-body pagosContenedor">
+                    <div class="row">
+                        <input id="inputContratoId" type="hidden" />
+                        <input id="inputEventoId" type="hidden" />
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="selectTipoPago">Metodo Pago:</label>
+                                <select id="selectMetodoPago" class="form-control" name="selectMetodoPago"></select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="inputMonto">Monto:</label>
+                                <input type="number" id="inputMonto" class="form-control" name="inputMonto" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label for="inputMonto" style="color:white">-</label>
+                            <button id="buttonAgregarPago" type="button" class="btn btn-primary btn-block">Agregar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="fechaDeposito">Fecha deposito:</label>
+                                <input id="fechaDeposito" type="date" class="form-control" name="fechaDeposito">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="selectBancoDestino">Banco Destino:</label>
+                                <select id="selectBancoDestino" class="form-control" name="selectBancoDestino"></select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="inputMora">Mora:</label>
+                                <input type="number" id="inputMora" class="form-control" name="inputMora" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="inputDescuento">Descuento:</label>
+                                <input type="number" id="inputDescuento" class="form-control" name="inputDescuento" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="inputNroOperacion">Nro Operacion:</label>
+                                <input type="text" id="inputNroOperacion" class="form-control" name="inputNroOperacion" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="selectCtaDestino">Cuenta Destino:</label>
+                                <select id="selectCtaDestino" class="form-control" name="selectCtaDestino"></select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="inputBancoOrigen">Banco Origen:</label>
+                                <input type="text" id="inputBancoOrigen" class="form-control" name="inputBancoOrigen" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 tablaCalculoPagos">
+                            <table id="tablePagoDetalle" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nro Cuota</th>
+                                        <th scope="col">F. Vencimiento</th>
+                                        <th scope="col">Descripcion</th>
+                                        <th scope="col">Monto</th>
+                                        <th scope="col">Descuento</th>
+                                        <th scope="col">Monto Pagado</th>
+                                        <th scope="col">M. Pendiente</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodyPagoDetalle">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-2 my-auto">
+                                    <p class="font-weight-bold">Monto Total:</p>
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <p id="pMontoTotal" class="pInformativo font-weight-bold"></p>
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <p class="font-weight-bold">Monto Pagado:</p>
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <p id="pMontoPagado" class="pInformativo font-weight-bold"></p>
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <p class="font-weight-bold">Monto Pendiente</p>
+                                </div>
+                                <div class="col-2 my-auto">
+                                    <p id="pMontoPendiente" class="pInformativo font-weight-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonPagar" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalDetalle" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="hTituloSeparaciones" class="modal-title">Detalles Pago</h5>
+            </div>
+            <div class="modal-body ">
+                <dl class="row" id="dlDetallePago">
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="buttonCrearSeparacion" class="btn btn-primary">Guardar</button>
+                <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalDuplicado" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="hTituloSeparaciones" class="modal-title">Alerta</h5>
+            </div>
+            <div class="modal-body ">
+                <h3>El numero de operacion es duplicado</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="buttonAceptarDuplicado" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                <button type="button" id="buttonRechazarDuplicado" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{   
+    <script src="~/Scripts/cobranzas/pagos.js"></script>
+}

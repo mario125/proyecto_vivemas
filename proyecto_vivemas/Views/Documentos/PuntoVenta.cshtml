@@ -1,0 +1,116 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Punto de Venta";
+}
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Punto de Venta
+            </div>
+            <div class="card-body">
+                <form id="ventaForm">
+                    <div class="form-group">
+                        <div class="form-row mb-4">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectTipoDocumento">Tipo Documento:</label>
+                                <select id="selectTipoDocumento" class="form-control"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectMoneda">Moneda:</label>
+                                <select id="selectMoneda" class="form-control"></select>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-1">
+                                <label for="inputDocumentoCliente">Cliente:</label>
+                                <input type="text" class="form-control" id="inputDocumentoCliente" placeholder="Documento/Nombre" name="inputDocumentoCliente">
+                                <input type="hidden" id="inputIdCliente">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputTotal" style="color:white">--------------------</label>
+                                <button type="button" class="btn btn-primary" id="buttonAgregarFila">Agregar Item</button>
+                            </div>
+                        </div>
+						<div class="form-row">
+							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+								<label for="selectMetodoPago">Metodo Pago:</label>
+								<select id="selectMetodoPago" class="form-control"></select>
+							</div>
+							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+								<label for="inputNroOperacion">Nro Operacion:</label>
+								<input type="text" class="form-control" id="inputNroOperacion" name="inputNroOperacion" placeholder="Nro Operacion" />
+							</div>
+							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+								<label for="inputFechaEmision">Fecha Emision:</label>
+								<input type="date" class="form-control" id="inputFechaEmision" onchange="validarFechaEmision()" name="inputFechaEmision" />
+							</div>
+							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+								<label for="inputFechaDeposito">Fecha Deposito:</label>
+								<input type="date" class="form-control" id="inputFechaDeposito" name="inputFechaDeposito" />
+							</div>
+							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+								<label for="selectBancoDestino">Banco Destino:</label>
+								<select id="selectBancoDestino" class="form-control" name="selectBancoDestino"></select>
+							</div>
+							<div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+								<label for="selectCtaDestino">Cuenta Destino:</label>
+								<select id="selectCtaDestino" class="form-control" name="selectCtaDestino"></select>
+							</div>
+						</div>
+                    </div>
+                    <hr>
+                    <div class="form-row" id="divTabla">
+                        <table class="table display" id="tableItems">
+                            <thead class="thead-dark">
+                                <tr class="d-flex">
+                                    <th scope="col" class="col-4">Descripcion</th>
+                                    <th scope="col" class="col-2">Codigo</th>
+                                    <th scope="col" class="col-2">Cant</th>
+                                    <th scope="col" class="col-2">Precio</th>
+                                    <th scope="col" class="col-2">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyItems"></tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 mb-1">
+                            <label for="inputSubtotal">Subtotal</label>
+                            <input type="number" class="form-control totales" id="inputSubtotal" placeholder="SubTotal"
+                                   value="0.00"
+                                   disabled>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 mb-1">
+                            <label for="inputImpuesto">IGV.</label>
+                            <input type="number" class="form-control totales" id="inputImpuesto" placeholder="IGV."
+                                   value="0.00"
+                                   disabled>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 mb-1">
+                            <label for="inputTotal">Total</label>
+                            <input type="number" class="form-control totales" id="inputTotal" placeholder="Total"
+                                   value="0.00"
+                                   disabled>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8 col-8 mb-1"></div>
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2 mb-1" style="float:right">
+                            <label for="inputTotal" style="color:white">----------</label>
+                            <button type="submit" class="btn btn-primary" id="buttonProcesarVenta">Procesar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/Scripts/Documentos/PuntoVenta.js"></script>
+}
+

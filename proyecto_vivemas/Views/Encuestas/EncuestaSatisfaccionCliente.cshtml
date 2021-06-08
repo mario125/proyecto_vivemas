@@ -1,0 +1,106 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Encuesta";
+}
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+}
+<div class="c-wrapper c-fixed-components">
+    <div class="c-body">
+        <main class="c-main">
+            <div class="container-fluid" style="width:210mm;">
+                <div class="fade-in">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <form id="formEncuesta">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Encuesta de Satisfaccion del cliente
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="inputCliente">Nombre Cliente:</label>
+                                                    <input type="text" id="inputCliente" class="form-control" name="inputCliente">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="text-center font-italic">
+                                                    "Con el fin de mejorar, les rogamos den respuesta sincera y abierta a las siguientes preguntas"
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="text-justify "><b><u>PERCEPCIÓN: </u></b>Se marcará con una cruz, dando la valoración 5 para un alto grado de satisfacción, cuatro para medio-alto, tres para medio, dos para medio-bajo y 1 para bajo. Se valora el servicio suministrado por <b>VIVEMAS INMOBILIARIA.</b></p>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <table id="tableEncuesta">
+                                                    <thead id="theadEncuesta">
+                                                        <tr>
+                                                            <th class="p-1" style="width:48%;">
+                                                                <h5>Aspectos a valorar</h5>
+                                                            </th>
+                                                            <th class="p-1">
+                                                                <div class="text-center"><i class="far fa-angry text-center" style="font-size:40px;"></i></div>
+
+                                                            </th>
+                                                            <th class="p-1">
+                                                                <div class="text-center"><i class="far fa-frown text-center" style="font-size:40px;"></i></div>
+
+                                                            </th>
+                                                            <th class="p-1">
+                                                                <div class="text-center"><i class="far fa-meh text-center" style="font-size:40px;"></i></div>
+
+                                                            </th>
+                                                            <th class="p-1">
+                                                                <div class="text-center"><i class="far fa-smile text-center" style="font-size:40px;"></i></div>
+
+                                                            </th>
+                                                            <th class="p-1">
+                                                                <div class="text-center"><i class="far fa-grin text-center" style="font-size:40px;"></i></div>
+
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbodyEncuesta"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <p class="text-justify">Si alguna de sus respuestas ha sido negativa, por favor indíquenos, sugerencias de mejora o comentarios sobre los aspectos que considere necesario modificar:</p>
+                                            </div>
+                                            <div class="col-12">
+                                                <textarea id="inputObservaciones" class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">Terminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Encuestas/EncuestaSatisfaccionCliente.js"></script>
+}

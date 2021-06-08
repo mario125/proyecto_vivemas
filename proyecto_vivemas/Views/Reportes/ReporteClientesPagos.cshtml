@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Reporte Pagos Cliente";
+}
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Reporte Pagos Cliente
+            </div>
+            <div class="card-body">
+                <form id="formReportePagosCliente">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">Proyecto:</label>
+                                <select class="form-control" id="selectProyecto"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputLote">Lote:</label>
+                                <input type="text" class="form-control" id="inputLote" placeholder="Lote">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputNroContrato">Nro Contrato:</label>
+                                <input type="text" class="form-control" id="inputNroContrato" placeholder="Nro Contrato">
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mb-1">
+                                <label for="inputDocumentoCliente">Cliente:</label>
+                                <input type="text" class="form-control" id="inputDocumentoCliente" placeholder="Nro documento/Razon Social">
+                                <input type="hidden" id="inputIdContrato">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputTotal" style="color:white">--------------------</label>
+                                <button type="submit" class="btn btn-primary" id="buttonEmitirReporte">Emitir Reporte</button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputFechaDesde">Fecha Desde:</label>
+                                <input type="date" class="form-control" id="inputFechaDesde" placeholder="Fecha desde">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputFechaHasta">Fecha Hasta:</label>
+                                <input type="date" class="form-control" id="inputFechaHasta" placeholder="Fecha hasta">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                        <button type="button" class="btn btn-primary" id="buttonEmitirReportePDF" disabled>PDF</button>
+                        <button type="button" class="btn btn-success" id="buttonEmitirReporteXLS" disabled>EXCEL</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="reporte" class="col-12 mt-5">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/Content/html2pdf/html2pdf.bundle.min.js"></script>
+    <script src="~/Content/table2excel/jquery.table2excel.min.js"></script>
+    <script src="~/Content/tableexport/xlsx.core.min.js"></script>
+    <script src="~/Content/tableexport/FileSaver.min.js"></script>
+    <script src="~/Content/tableexport/tableexport.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.10/jspdf.plugin.autotable.min.js"></script>
+    <script type="text/javascript">
+        var tableToExcel = (function () {
+            var uri = 'data:application/vnd.ms-excel;base64,'
+                , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns: x = "urn:schemas-microsoft-com:office:excel" xmlns = "http://www.w3.org/TR/REC-html40" > <head> <!--[if gte mso 9]><xml><x: <x:ExcelWorksheets> <x: <x: {worksheet}</x:Name><x: <x:DisplayGridlines/></x: WorksheetOptions > </x: ExcelWorksheet ></x: ExcelWorksheets ></x: ExcelWorkbook ></xml ></head > <body><table>{table}</table></body></html > '
+                , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+            return function (table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+    <script src="~/Scripts/Reportes/reporteClientesPagos.js"></script>
+}

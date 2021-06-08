@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Reporte Transacciones";
+}
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Reporte Pagos Cliente
+            </div>
+            <div class="card-body">
+                <form id="formReporteTransacciones">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">Proyecto:</label>
+                                <select class="form-control" id="selectProyecto" name="selectProyecto"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectTipoTransaccion">Tipo Transaccion:</label>
+                                <select class="form-control" id="selectTipoTransaccion" name="selectTipoTransaccion"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectMetodoPago">Metodo Pago:</label>
+                                <select id="selectMetodoPago" class="form-control" name="selectMetodoPago"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectBancoDestino">Banco:</label>
+                                <select id="selectBancoDestino" class="form-control" name="selectBancoDestino"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectCtaDestino">Cuenta:</label>
+                                <select id="selectCtaDestino" class="form-control" name="selectCtaDestino"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label style="color:white">-----------:</label>
+                                <button type="submit" class="btn btn-primary">Obtener Reporte</button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputFechaDesde">Fecha Desde:</label>
+                                <input type="date" class="form-control" id="inputFechaDesde" placeholder="Fecha desde">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="inputFechaHasta">Fecha Hasta:</label>
+                                <input type="date" class="form-control" id="inputFechaHasta" placeholder="Fecha hasta">
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <button type="button" class="btn btn-primary" id="buttonEmitirReportePDF" disabled>PDF</button>
+                                <button type="button" class="btn btn-success" id="buttonEmitirReporteXLS" disabled>EXCEL</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div id="reporte">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    @*<script src="~/Content/html2pdf/html2pdf.bundle.min.js"></script>
+        <script src="~/Content/table2excel/jquery.table2excel.min.js"></script>
+        <script src="~/Content/tableexport/xlsx.core.min.js"></script>
+        <script src="~/Content/tableexport/FileSaver.min.js"></script>
+        <script src="~/Content/tableexport/tableexport.min.js"></script>
+        <script type="text/javascript">
+            var tableToExcel = (function () {
+                var uri = 'data:application/vnd.ms-excel;base64,'
+                    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns: x = "urn:schemas-microsoft-com:office:excel" xmlns = "http://www.w3.org/TR/REC-html40" > <head> <!--[if gte mso 9]><xml><x: <x:ExcelWorksheets> <x: <x: {worksheet}</x:Name><x: <x:DisplayGridlines/></x: WorksheetOptions > </x: ExcelWorksheet ></x: ExcelWorksheets ></x: ExcelWorkbook ></xml ></head > <body><table>{table}</table></body></html > '
+                    , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                    , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+            return function (table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+                window.location.href = uri + base64(format(template, ctx))
+            }
+                }) ()
+        </script>*@
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.10/jspdf.plugin.autotable.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Reportes/reporteTransacciones.js"></script>
+}

@@ -1,0 +1,405 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "Transacciones";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/Css/Cobranzas/pagos.css" />
+    <link rel="stylesheet" href="~/Css/Reportes/EmitirDocumentoElectronico.css" />
+}
+
+<div class="row">
+    <div class="col-12 "> 
+        <div class="card">
+            <div class="card-header">
+                Punto Venta
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div id="tableTransacciones"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalEdicionTransaccion" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <form id="formPagos">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTituloPagos" class="modal-title">Editar Transaccion</h5>
+                </div>
+                <div class="modal-body pagosContenedor">
+                    <input id="inputTransaccionId" type="hidden" />
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="fechaDeposito">Fecha deposito:</label>
+                                <input type="date" id="fechaDeposito" class="form-control" name="fechaDeposito">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="selectBancoDestino">Banco Destino:</label>
+                                <select id="selectBancoDestino" class="form-control" name="selectBancoDestino"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputNroOperacion">Nro Operacion:</label>
+                                <input type="text" id="inputNroOperacion" class="form-control" name="inputNroOperacion" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="selectCtaDestino">Cuenta Destino:</label>
+                                <select id="selectCtaDestino" class="form-control" name="selectCtaDestino"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonPagar" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalEdicionFechaEmision" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <form id="formFechaEmision">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTituloPagos" class="modal-title">Editar Fecha Emision</h5>
+                </div>
+                <div class="modal-body pagosContenedor">
+                    <input id="inputTransaccionIdHidden" type="hidden" />
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="fechaDeposito">Fecha Emision:</label>
+                                <input type="date" id="fechaEmision" class="form-control" onchange="validarFechaEmision()" name="fechaDeposito">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalObservacionesTransaccion" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <form id="formObservaciones">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTituloPagos" class="modal-title">Observaciones</h5>
+                </div>
+                <div class="modal-body pagosContenedor">
+                    <input id="inputTransaccionIdObservacion" type="hidden" />
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="hidden" id="transaccionId" />
+                                <label for="fechaDeposito">Observaciones</label>
+                                <textarea id="transaccionObservacion" class="form-control" name="transaccionObservacion" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalConfirmacionAnulacion" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input type="hidden" id="inputTransaccionId" />
+                <input type="hidden" id="inputTipoTransaccion" />
+                <h3>Esta operacion es irreversible, esta seguro que desea anular la transaccion?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="buttonAnularTransaccion">anular</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalConfirmacionEmision" class="modal fade">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input type="hidden" id="inputAccionHidden" />
+                <input type="hidden" id="inputTransaccionIdHiddenConfirmacion" />
+                <div id="invoice">
+                    <div class="invoice overflow-auto">
+                        <div style="min-width: 600px;">
+                            <header>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="text-center">
+                                            <img src="~/Img/Vivemas-logo-v2.svg" data-holder-rendered="true" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6 company-details">
+                                        <h2 class="name" style="text-align:center">
+                                            <b id="documento_empresa_nombre"></b>
+                                        </h2>
+                                        <div style="text-align:center" id="documento_empresa_direccion">
+                                            <b>Domicilio Fiscal:</b>
+                                        </div>
+                                        <div style="text-align:center" id="documento_empresa_numeroContacto">
+                                            <b>Telefono:</b>
+                                        </div>
+                                        <div style="text-align:center" id="documento_empresa_correo">
+                                            <b>Correo:</b>
+                                        </div>
+                                    </div>
+                                    <div class="col-3" style="border:solid 1px;">
+                                        <div class="font-xl text-center" id="documento_empresa_documento">
+                                            RUC:
+                                        </div>
+                                        <div class="font-xl text-center font-weight-bold" id="documento_descripcion">
+
+                                        </div>
+                                        <div class="text-center font-lg" id="documento_serie">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </header>
+                            <main>
+                                <div class="row">
+                                    <div class=" col-12" style="border:solid 1px;">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <b>Cliente</b>
+                                            </div>
+                                            <div class="col-10" id="documento_cliente_nombre">
+                                                :
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <b>Nro. Documento</b>
+                                            </div>
+                                            <div class="col-10" id="documento_cliente_nroDocumento">
+                                                :
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <b>Direccion</b>
+                                            </div>
+                                            <div class="col-10" id="documento_cliente_direccion">
+                                                :
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <b>Fecha de Emision</b>
+                                            </div>
+                                            <div class="col-5" id="documento_fechaEmision">
+                                                :
+                                            </div>
+                                            <div class="col-2">
+                                                <b>Moneda</b>
+                                            </div>
+                                            <div class="col-3" id="documento_moneda_descripcion">
+                                                :
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-1">
+                                    <table border="1" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="padding:5px;">CANTIDAD</th>
+                                                <th class="text-center" style="padding:5px;">CODIGO</th>
+                                                <th class="text-center" style="padding:5px;">DESCRIPCION</th>
+                                                <th class="text-center" style="padding:5px;">U. M.</th>
+                                                <th class="text-center">VALOR UNITARIO</th>
+                                                <th class="text-center" style="width:100px">IMPORTE DE VENTA</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyDetalles">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--<div class="thanks">Sin impuestos</div>-->
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="text-center">
+                                            <div class="row ml-1 mt-2 mb-2" id="documento_montoletras">
+                                                SON:
+                                            </div>
+                                            <div class="thanks mt-1 mt-2 mb-2">
+                                                <canvas id="qr-code"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6" style="padding:0;">
+                                        <table width="100%" border="1">
+                                            <tr>
+                                                <td class="text-right"><b>OP. GRAVADA:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left" id="moneda_simbolo"></div>
+                                                    <div class="text-right" style="float:right">0.00</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>OP. EXONERADA:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left" id="moneda_simbolo2"></div>
+                                                    <div class="text-right" style="float:right">0.00</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>OP. INAFECTA:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right" style="float:right" id="documento_subtotal"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>ISC:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right" style="float:right">0.00</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>IGV:</b></td>
+                                                <td class="text-right">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right" style="float:right" id="documento_igv"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>ICBPER:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right" style="float:right">0.00</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>OTROS CARGOS:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right" style="float:right">0.00</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>OTROS TRIBUTOS:</b></td>
+                                                <td style="width:100px">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right" style="float:right">0.00</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>TOTAL:</b></td>
+                                                <td class="text-right">
+                                                    <div class="ml-1 text-left monedaSimbolo" style="float:left"></div>
+                                                    <div class="text-right documentoTotal" style="float:right"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <div style="border-bottom:solid 2px"><b>Informacion Adicional</b></div>
+
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Fecha Deposito:
+                                                </div>
+                                                <div class="col-6" id="transaccion_fechadeposito">
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Total:
+                                                </div>
+                                                <div class="col-6 documentoTotal">
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Nro de Operacion:
+                                                </div>
+                                                <div class="col-6" id="transaccion_nrooperacion">
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Banco:
+                                                </div>
+                                                <div class="col-6" id="transaccion_banco">
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    Cuenta:
+                                                </div>
+                                                <div class="col-6" id="transaccion_cuenta">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="notices mt-2">
+                                        <div>Aviso:</div>
+                                        <div class="notice">
+                                            Este documento es una representacion impresa de un documento emitido en la sunat desde el sistema del contribuyente.
+                                            El emisor electronico puede verificarla utilizando su clave SOL, el adquiriente o Usuario puede consultar su validez en SUNAT virtual: www.sunat.gob.pe, en Opciones sin clave SOL/Consulta de validez CPE.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </main>
+                            <footer id="documento_digestValue">
+                            </footer>
+                        </div>
+                        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                        <div></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="buttonEmitirDocumento">Emitir Documento</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="~/Scripts/Reportes/emitirDocumentoElectronico.js"></script>
+    <script src="~/Scripts/Transacciones/transacciones.js"></script>
+}

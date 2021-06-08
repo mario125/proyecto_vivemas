@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Viveinco</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/Icons/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/Icons/css/free.min.css" rel="stylesheet" />
+    <link href="~/Content/Icons/css/brand.min.css" rel="stylesheet" />
+    <link href="~/Content/Icons/css/flag.min.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+    <link rel="icon" href="~/favicon.ico">
+</head>
+<body class="c-app flex-row align-items-center">
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/js")
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

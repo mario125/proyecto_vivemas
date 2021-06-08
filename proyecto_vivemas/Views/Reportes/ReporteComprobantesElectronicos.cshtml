@@ -1,0 +1,251 @@
+﻿
+@{
+    ViewBag.Title = "ReporteComprobantesElectronicos";
+}
+
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "ReporteComprobantesElectronicos";
+}
+@section styles{
+    <link href="~/Content/jquery-ui/css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Css/Separaciones/Index.css" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Reporte Eventos Detalle
+            </div>
+            <div class="card-body">
+                <form id="formComprobantes">
+                    <div class="form-group">
+
+                        
+
+                        <div class="form-row">
+                          
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">Proyecto:</label>
+                                <select class="form-control" id="selectSerie"></select>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">desde:</label>
+                                <input type="date" class="form-control" id="inputFechaDesde">
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label for="selectProyecto">hasta:</label>
+                                <input type="date" class="form-control" id="inputFechaHasta">
+                            </div>
+
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 mb-1">
+                                <label style="color:white">-----------:</label>
+                                <button type="submit" class="btn btn-primary">Obtener Reporte</button>
+                            </div>
+
+
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-1">
+                                <button type="button" class="btn btn-primary" id="buttonEmitirReportePDF" disabled>PDF</button>
+                                <button type="button" class="btn btn-success" id="buttonEmitirReporteXLS" disabled>EXCEL</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="table-responsive overflow-auto" style="max-height:500px">
+                    <table id="tableReporte" class="table table-bordered table-sm" data-cols-width="20,20,20,50,10,10,15">
+                        <thead id="theadReporte">
+                        </thead>
+                        <tbody id="tbodyReporte">
+                        </tbody>
+                        <tfoot id="tfootReporte">
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Content/jquery-ui/js/jquery-ui.min.js"></script>
+    <script src="~/Content/reporting/jspdf.min.js"></script>
+    <script src="~/Content/reporting/jspdf.plugin.autotable.min.js"></script>
+    <script src="~/Content/reporting/tableToExcel.js"></script>
+    <script src="~/Content/reporting/FileSaver.min.js"></script>
+  
+    <script type="text/javascript">
+        $(document).ready(function () {
+            cargarSeries();
+            
+        });
+
+        const cargarSeries = async () => {
+          
+
+            var response = await axios.post('getSeries');
+            $('#selectSerie').select2({
+                theme: 'bootstrap4',
+                data: response.data
+            });            
+        }
+
+        document.getElementById('formComprobantes').addEventListener('submit', (event) => {
+            event.preventDefault();
+           // alert(holas);
+            obtenerReporte(); 
+            
+
+
+        });
+
+        document.getElementById('buttonEmitirReportePDF').addEventListener("click", (e) => {
+            const doc = new jsPDF({
+                orientation: "landscape",
+                unit: "in",
+                format: [1000, 792]
+            });
+            doc.autoTable({
+                html: '#tableReporte',
+                showHead: 'firstPage',
+                showFoot: 'lastPage'
+            });
+            doc.save('reporteEventos.pdf');
+        });
+
+        document.getElementById('buttonEmitirReporteXLS').addEventListener("click", (e) => {
+            TableToExcel.convert(document.getElementById("tableReporte"), {
+                name: "reporteEventos.xlsx",
+                sheet: {
+                    name: "Reporte"
+                }
+            });
+        });
+
+        const obtenerReporte = async () => {
+
+            var data = new Object();
+
+            var combo = document.getElementById("selectSerie");
+
+            var selected = combo.options[combo.selectedIndex].text;     
+
+            var divisiones = selected.split("-");
+
+            data.serie = divisiones[1];
+
+            data.fechaInicio = document.querySelector("#inputFechaDesde").value;
+
+            data.fechaFin = document.querySelector("#inputFechaHasta").value;
+
+            if (divisiones[1].slice(0, 2) == "FN" || divisiones[1].slice(0, 2) == "BN") {
+
+                const response = await axios.post('getdNotaCredito', JSON.stringify(data), {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log(response);
+                console.log(response.data);
+                console.log(response.data.Data);
+                console.log(response.data.Data.dataReporte);
+                console.log(response.data.Data.flag);
+
+                if (response.data.Data.flag == 1) {
+                    document.getElementById('buttonEmitirReportePDF').disabled = false;
+                    document.getElementById('buttonEmitirReporteXLS').disabled = false;
+                    var reporteCabecera = '';
+                    var reporteCuerpo = '';
+                    reporteCabecera += '<tr>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">NOTA DE CREDITO</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">RAZON SOCIAL</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">N° DE DOCUMENTO</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">F. EMISION</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">MONEDA</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">MONTO TOTAL</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">DOC. REFERENCIA</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">F. REFERENCIA</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">MOTIVO</th>' +
+                        '</tr>';
+                    $("#theadReporte").html('').append(reporteCabecera);
+                    response.data.Data.dataReporte.forEach((item) => {
+                        reporteCuerpo += '<tr>' +
+                            '<td>' + item.nota + '</td>' +
+                            '<td>' + item.notacredito_cliente_nombre + '</td>' +
+                            '<td>' + item.notacredito_cliente_nrodocumento + '</td>' +
+                            '<td>' + item.notacredito_fechaemision + '</td>' +
+                            '<td>' + item.notacredito_moneda_codigo + '</td>' +
+                            '<td>' + item.notacredito_total + '</td>' +
+                            '<td>' + item.referencia + '</td>' +
+                            '<td>' + item.documentoventa_fechaemision + '</td>' +
+                            '<td>' + item.notacredito_descripcionnota + '</td>' +
+                            '</tr>'
+                    });
+                    $("#tbodyReporte").html('').append(reporteCuerpo);
+                } else {
+                    toastr["error"]("ocurrio un error en el sistema, comuniquese con el area de sistemas");
+                }
+
+            } else {
+
+                const response = await axios.post('getdDocumentosElectronicos', JSON.stringify(data), {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.data.Data.flag == 1) {
+                    document.getElementById('buttonEmitirReportePDF').disabled = false;
+                    document.getElementById('buttonEmitirReporteXLS').disabled = false;
+                    var reporteCabecera = '';
+                    var reporteCuerpo = '';
+                    reporteCabecera += '<tr>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">DOCUMENTO</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">RAZON SOCIAL</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">N° DE DOCUMENTO</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">F. EMISION</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">N° DOC. DE VENTA</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">MONEDA</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">TOTAL</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">NOTA DE CREDITO</th>' +
+                        '<th data-fill-color="3399ff" data-f-color="ebedef" class="bg-info">FECHA DE NOTA</th>' +
+                        '</tr>';
+                    $("#theadReporte").html('').append(reporteCabecera);
+                    response.data.Data.dataReporte.forEach((item) => {
+                        reporteCuerpo += '<tr>' +
+                            '<td>' + item.documentoEmision + '</td>' +
+                            '<td>' + item.documentoventa_cliente_nombre + '</td>' +
+                            '<td>' + item.documentoventa_cliente_nrodocumento + '</td>' +
+                            '<td>' + item.documentoventa_fechaemision + '</td>' +
+                            '<td>' + item.documentoventa_id + '</td>' +
+                            '<td>' + item.documentoventa_moneda_codigo + '</td>' +
+                            '<td>' + item.documentoventa_total + '</td>' +
+                            '<td>' + (item.notacredito_fechaemision == null ? "" : item.notacredito_fechaemision) + '</td>' +
+                            '<td>' + (item.notacreditoanulacion == null ? "" : item.notacreditoanulacion) + '</td>' +
+                            '</tr>'
+                    });
+                    $("#tbodyReporte").html('').append(reporteCuerpo);
+                } else {
+                    toastr["error"]("ocurrio un error en el sistema, comuniquese con el area de sistemas");
+                }
+
+            }
+            
+
+            
+
+            
+
+
+        }
+
+
+
+     
+    </script>
+}
+

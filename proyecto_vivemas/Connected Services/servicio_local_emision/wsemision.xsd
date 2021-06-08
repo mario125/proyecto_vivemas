@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://wsemision.pe.com/" targetNamespace="http://wsemision.pe.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="generarBoleta" type="tns:generarBoleta" />
+  <xs:element name="generarBoletaResponse" type="tns:generarBoletaResponse" />
+  <xs:element name="generarComunicacionBaja" type="tns:generarComunicacionBaja" />
+  <xs:element name="generarComunicacionBajaResponse" type="tns:generarComunicacionBajaResponse" />
+  <xs:element name="generarFactura" type="tns:generarFactura" />
+  <xs:element name="generarFactura2" type="tns:generarFactura2" />
+  <xs:element name="generarFactura2Response" type="tns:generarFactura2Response" />
+  <xs:element name="generarFacturaResponse" type="tns:generarFacturaResponse" />
+  <xs:element name="generarNotaCredito" type="tns:generarNotaCredito" />
+  <xs:element name="generarNotaCreditoResponse" type="tns:generarNotaCreditoResponse" />
+  <xs:element name="generarNotaDebito" type="tns:generarNotaDebito" />
+  <xs:element name="generarNotaDebitoResponse" type="tns:generarNotaDebitoResponse" />
+  <xs:element name="generarResumenBoleta" type="tns:generarResumenBoleta" />
+  <xs:element name="generarResumenBoletaResponse" type="tns:generarResumenBoletaResponse" />
+  <xs:element name="hello" type="tns:hello" />
+  <xs:element name="helloResponse" type="tns:helloResponse" />
+  <xs:element name="obtenerStatus" type="tns:obtenerStatus" />
+  <xs:element name="obtenerStatusResponse" type="tns:obtenerStatusResponse" />
+  <xs:complexType name="generarNotaDebito">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarNotaDebitoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="obtenerStatusResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarBoleta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarBoletaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarFactura">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarFacturaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarFactura2">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarFactura2Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarResumenBoleta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarResumenBoletaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarComunicacionBaja">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarComunicacionBajaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarNotaCredito">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="documento" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="generarNotaCreditoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

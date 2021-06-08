@@ -1,0 +1,154 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+    ViewBag.Title = "M. Clientes";
+}
+
+<div class="row">
+    <div class="col-12 ">
+        <div class="card">
+            <div class="card-header">
+                Clientes
+            </div>
+            <div class="card-body">
+                <div class="row form-group">
+                    <div class="col-3">
+                        <button type="button" id="buttonAbrirModalClientes" class="btn btn-block btn-primary">Crear Cliente</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="tableClientes"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalClientes" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <form id="formClientes">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="hTituloClientes" class="modal-title">Crear Cliente</h5>
+                </div>
+                <div class="modal-body clientesContenedor">
+                    <input type="hidden" id="inputIdCliente" />
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="selectMedioContacto">Medio de contacto:</label>
+                                <select id="selectMedioContacto" class="form-control" name="selectMedioContacto"></select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="selectCanalContacto">Canal de contacto:</label>
+                                <select id="selectCanalContacto" class="form-control" name="selectCanalContacto"></select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="selectPromotor">Promotor:</label>
+                                <select id="selectPromotor" class="form-control" name="selectPromotor"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="selectTipoPersona">Tipo persona:</label>
+                                <select id="selectTipoPersona" class="form-control" name="selectTipoPersona"></select>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <label>Documento</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <select id="selectTipoDocumento" class="form-control" name="selectTipoDocumento">
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-7">
+                                    <div class="form-group">
+                                        <input type="text" id="inputNroDocumento" class="form-control" name="inputNroDocumento" placeholder="Nro de documento" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="inputRazonSocial">Nombre/Razon Social</label>
+                                <input type="text" id="inputRazonSocial" class="form-control" name="inputRazonSocial" placeholder="Nombre/Razon Social" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="inputNroContacto">Nro de contacto:</label>
+                            <div class="input-group">
+                                <input id="inputNroContacto" type="text" class="form-control" name="inputNroContacto" placeholder="Numero de contacto" required>
+                                <div class="input-group-append">
+                                    <button type="button" id="buttonBuscarNroContacto" class="btn btn-secondary"><i class="c-icon-sm cil-zoom"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="inputNroAuxiliarContacto">Nro Auxiliar de contacto:</label>
+                                <input id="inputNroAuxiliarContacto" type="text" class="form-control" name="inputNroAuxiliarContacto" placeholder="Numero Auxiliar de contacto">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="inputEmail">Correo electronico:</label>
+                                <input id="inputEmail" type="email" class="form-control" name="inputEmail" placeholder="Correo electronico">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="selectInteresProyecto">Interes de proyectos</label>
+                                <select id="selectInteresProyecto" class="form-control" name="interesProyecto[]" multiple="multiple"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="selectDepartamento">Departamento:</label>
+                                <select id="selectDepartamento" class="form-control" name="selectDepartamento"></select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="selectProvincia">Provincia:</label>
+                                <select id="selectProvincia" class="form-control" name="selectProvincia"></select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="selectDistrito">Distrito:</label>
+                                <select id="selectDistrito" class="form-control" name="selectDistrito"></select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="inputDireccion">Direccion:</label>
+                                <input type="text" id="inputDireccion" class="form-control" name="inputDireccion" placeholder="Direccion" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="buttonCrearCliente" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="buttonLimpiar" class="btn btn-outline-success buttonLimpiar">Limpiar</button>
+                    <button type="button" id="buttonCerrar" class="btn btn-secondary buttonLimpiar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/Clientes/Index.js"></script>
+}

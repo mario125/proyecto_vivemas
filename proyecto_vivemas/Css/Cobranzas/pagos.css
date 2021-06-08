@@ -1,0 +1,10 @@
+﻿.datepicker-dropdown{
+    z-index:9999 !important;
+}
+.tablaCalculoPagos{
+    max-height:300px;
+    overflow-y:scroll;
+}
+.modal-lg{
+    max-width: 70%;
+}

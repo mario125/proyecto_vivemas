@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Viveinco</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/Icons/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/Icons/css/free.min.css" rel="stylesheet" />
+    <link href="~/Content/Icons/css/brand.min.css" rel="stylesheet" />
+    <link href="~/Content/Icons/css/flag.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/jquery-datepicker/dist/css/datepicker.min.css" />
+    <link rel="stylesheet" href="~/Content/jquery-datepicker/dist/css/datepicker-bs4.min.css" />
+    @RenderSection("styles", required: false)
+    <link rel="icon" href="~/favicon.ico">
+</head>
+<body class="c-app flex-row align-items-center">
+    @if (Session["usuario"] != null)
+    {
+        if (long.Parse(Session["cargoId"].ToString()) == 13 || long.Parse(Session["cargoId"].ToString()) == 14)
+        {
+            <!--Menu-->
+            <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+                <div class="c-sidebar-brand d-lg-down-none">
+                    <img class="c-sidebar-brand-full" width="118" height="46" src="~/Img/Vivemas-logo-v2.svg" />
+                    <img class="c-sidebar-brand-minimized" width="46" height="46" src="~/Img/icono-4.jpg" />
+                </div>
+
+                <ul class="c-sidebar-nav">                   
+                    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="~/Content/Icons/sprites/free.svg#cil-puzzle"></use>
+                            </svg> Cobranzas
+                        </a>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Cobranzas/Pagos"><span class="c-sidebar-nav-icon"></span> Pagos</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Transacciones/Transacciones"><span class="c-sidebar-nav-icon"></span> Transacciones</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Documentos/RegistroVentas"><span class="c-sidebar-nav-icon"></span> R. Ventas</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Documentos/PuntoVenta"><span class="c-sidebar-nav-icon"></span> Punto Ventas</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Cobranzas/RegistroEventos"><span class="c-sidebar-nav-icon"></span> R. Eventos</a></li>
+                            </ul>
+                    </li>
+                    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="~/Content/Icons/sprites/free.svg#cil-puzzle"></use>
+                            </svg> Reportes
+                        </a>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteVentas"><span class="c-sidebar-nav-icon"></span>R. Ventas</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteClientesPagos"><span class="c-sidebar-nav-icon"></span>R. Clientes Pagos</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteTransacciones"><span class="c-sidebar-nav-icon"></span> R. Transacciones</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteClientesMin"><span class="c-sidebar-nav-icon"></span> R. Clientes Min</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteEstadoCobranza"><span class="c-sidebar-nav-icon"></span> R. Estado Cobranza</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/RegistroEventos"><span class="c-sidebar-nav-icon"></span> R. Eventos</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteEventos"><span class="c-sidebar-nav-icon"></span> Rep. Eventos</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteEventosDetalle"><span class="c-sidebar-nav-icon"></span> Rep. Eventos Detalle</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteComprobantesElectronicos"><span class="c-sidebar-nav-icon"></span> Rep. Com. electronicos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+            </div>
+            <!--Fin Menu-->
+        }
+        else
+        {
+            <!--Menu-->
+            <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+                <div class="c-sidebar-brand d-lg-down-none">
+                    <img class="c-sidebar-brand-full" width="118" height="46" src="~/Img/Vivemas-logo-v2.svg" />
+                    <img class="c-sidebar-brand-minimized" width="46" height="46" src="~/Img/icono-4.jpg" />                   
+                </div>
+
+                <ul class="c-sidebar-nav">
+                    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="~/Content/Icons/sprites/free.svg#cil-puzzle"></use>
+                            </svg> Ventas
+                        </a>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Clientes/Index"><span class="c-sidebar-nav-icon cil-pencil"></span> M. Clientes</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Separaciones/Index"><span class="c-sidebar-nav-icon cil-pencil"></span> Separaciones</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Clientes/Planificador"><span class="c-sidebar-nav-icon cil-pencil"></span> Planificador</a></li>
+                        </ul>
+                    </li>
+                    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="~/Content/Icons/sprites/free.svg#cil-puzzle"></use>
+                            </svg> Proyectos
+                        </a>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span> M. Proyectos</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#"><span class="c-sidebar-nav-icon"></span> M. Lotes</a></li>
+                        </ul>
+                    </li>
+                    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="~/Content/Icons/sprites/free.svg#cil-puzzle"></use>
+                            </svg> Cobranzas
+                        </a>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Cobranzas/Pagos"><span class="c-sidebar-nav-icon"></span> Pagos</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Transacciones/Transacciones"><span class="c-sidebar-nav-icon"></span> Transacciones</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Documentos/RegistroVentas"><span class="c-sidebar-nav-icon"></span> R. Ventas</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Documentos/PuntoVenta"><span class="c-sidebar-nav-icon"></span> Punto Ventas</a></li>
+                        </ul>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Cobranzas/RegistroEventos"><span class="c-sidebar-nav-icon"></span> R. Eventos</a></li>
+                        </ul>
+                    </li>
+                    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+                        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="~/Content/Icons/sprites/free.svg#cil-puzzle"></use>
+                            </svg> Reportes
+                        </a>
+                        <ul class="c-sidebar-nav-dropdown-items">
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteVentas"><span class="c-sidebar-nav-icon"></span>R. Ventas</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteClientesPagos"><span class="c-sidebar-nav-icon"></span>R. Clientes Pagos</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteTransacciones"><span class="c-sidebar-nav-icon"></span> R. Transacciones</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteClientesMin"><span class="c-sidebar-nav-icon"></span> R. Clientes Min</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteEstadoCobranza"><span class="c-sidebar-nav-icon"></span> R. Estado Cobranza</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/RegistroEventos"><span class="c-sidebar-nav-icon"></span> R. Eventos</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteEventos"><span class="c-sidebar-nav-icon"></span> Rep. Eventos</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteEventosDetalle"><span class="c-sidebar-nav-icon"></span> Rep. Eventos Detalle</a></li>
+                            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/Reportes/ReporteComprobantesElectronicos"><span class="c-sidebar-nav-icon"></span> Rep. Com. electronicos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+            </div>
+            <!--Fin Menu-->
+        }
+
+        <!--Contenedor-->
+        <div class="c-wrapper c-fixed-components">
+            <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+                <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+                    <svg class="c-icon c-icon-lg">
+                        <use xlink:href="~/Content/Icons/sprites/free.svg#cil-menu"></use>
+                    </svg>
+                </button>
+                <a class="c-header-brand d-lg-none" href="#">
+                    <svg width="118" height="46" alt="CoreUI Logo">
+                        <use xlink:href="assets/brand/coreui.svg#full"></use>
+                    </svg>
+                </a>
+                <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
+                    <svg class="c-icon c-icon-lg">
+                        <use xlink:href="~/Content/Icons/sprites/free.svg#cil-menu"></use>
+                    </svg>
+                </button>
+                <ul class="c-header-nav d-md-down-none">
+                    <li class="c-header-nav-item px-3">Empresa: @Session["empresaNombre"].ToString().ToUpper()</li>
+                </ul>
+                <ul class="c-header-nav ml-auto mr-4">
+                    <li class="c-header-nav-item dropdown">
+                        <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="c-avatar">
+                                <i class="cil-user"></i>
+                                <!--<img class="c-avatar-img" src="" alt="user@email.com">-->
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right pt-0">
+                            <div class="dropdown-header bg-light py-2"><strong>Cuenta</strong></div>
+                            <a class="dropdown-item" href="#">
+                                <i class="c-icon mr-2 cil-user"></i> Cargo: @Session["cargo"].ToString()
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="c-icon mr-2 cil-user"></i> Usuario: @Session["nombre"].ToString()
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="c-icon mr-2 cil-user"></i> Documento: @Session["documento"].ToString()
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/usuarios/CerrarSesion">
+                                <svg class="c-icon mr-2">
+                                    <use xlink:href="~/Content/Icons/sprites/free.svg#cil-account-logout"></use>
+                                </svg> Cerrar Sesion
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </header>
+            <div class="c-body">
+                <main class="c-main">
+                    <div class="container-fluid">
+                        <div class="fade-in">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </main>
+                <footer class="c-footer">
+                    @*<div><a href="https://coreui.io">CoreUI</a> &copy; 2020 creativeLabs.</div>
+                        <div class="ml-auto">Powered by&nbsp;<a href="https://coreui.io/">CoreUI</a></div>*@
+                </footer>
+            </div>
+        </div>
+        <!--Fin Contenedor-->
+    }
+    else
+    {
+        Response.Redirect(Url.Action("Index", "Home"));
+        @RenderBody()
+    }
+
+
+
+    @Scripts.Render("~/bundles/js")
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="~/Content/jquery-datepicker/dist/js/datepicker.min.js"></script>
+    <script src="~/Content/jquery-datepicker/dist/js/locales/es.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

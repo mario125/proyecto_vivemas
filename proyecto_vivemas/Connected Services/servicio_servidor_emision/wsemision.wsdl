@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://wsemision.pe.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="wsemision" targetNamespace="http://wsemision.pe.com/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://192.168.0.100:8080/gepp_emisionelectronicafull/wsemision?xsd=1" namespace="http://wsemision.pe.com/" />
+    </xsd:schema>
+  </types>
+  <message name="generarFactura2">
+    <part name="parameters" element="tns:generarFactura2" />
+  </message>
+  <message name="generarFactura2Response">
+    <part name="parameters" element="tns:generarFactura2Response" />
+  </message>
+  <message name="generarFactura">
+    <part name="parameters" element="tns:generarFactura" />
+  </message>
+  <message name="generarFacturaResponse">
+    <part name="parameters" element="tns:generarFacturaResponse" />
+  </message>
+  <message name="hello">
+    <part name="parameters" element="tns:hello" />
+  </message>
+  <message name="helloResponse">
+    <part name="parameters" element="tns:helloResponse" />
+  </message>
+  <message name="obtenerStatus">
+    <part name="parameters" element="tns:obtenerStatus" />
+  </message>
+  <message name="obtenerStatusResponse">
+    <part name="parameters" element="tns:obtenerStatusResponse" />
+  </message>
+  <message name="generarNotaDebito">
+    <part name="parameters" element="tns:generarNotaDebito" />
+  </message>
+  <message name="generarNotaDebitoResponse">
+    <part name="parameters" element="tns:generarNotaDebitoResponse" />
+  </message>
+  <message name="generarComunicacionBaja">
+    <part name="parameters" element="tns:generarComunicacionBaja" />
+  </message>
+  <message name="generarComunicacionBajaResponse">
+    <part name="parameters" element="tns:generarComunicacionBajaResponse" />
+  </message>
+  <message name="generarResumenBoleta">
+    <part name="parameters" element="tns:generarResumenBoleta" />
+  </message>
+  <message name="generarResumenBoletaResponse">
+    <part name="parameters" element="tns:generarResumenBoletaResponse" />
+  </message>
+  <message name="generarNotaCredito">
+    <part name="parameters" element="tns:generarNotaCredito" />
+  </message>
+  <message name="generarNotaCreditoResponse">
+    <part name="parameters" element="tns:generarNotaCreditoResponse" />
+  </message>
+  <message name="generarBoleta">
+    <part name="parameters" element="tns:generarBoleta" />
+  </message>
+  <message name="generarBoletaResponse">
+    <part name="parameters" element="tns:generarBoletaResponse" />
+  </message>
+  <portType name="wsemision">
+    <operation name="generarFactura2">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarFactura2Request" message="tns:generarFactura2" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarFactura2Response" message="tns:generarFactura2Response" />
+    </operation>
+    <operation name="generarFactura">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarFacturaRequest" message="tns:generarFactura" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarFacturaResponse" message="tns:generarFacturaResponse" />
+    </operation>
+    <operation name="hello">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/helloRequest" message="tns:hello" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/helloResponse" message="tns:helloResponse" />
+    </operation>
+    <operation name="obtenerStatus">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/obtenerStatusRequest" message="tns:obtenerStatus" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/obtenerStatusResponse" message="tns:obtenerStatusResponse" />
+    </operation>
+    <operation name="generarNotaDebito">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarNotaDebitoRequest" message="tns:generarNotaDebito" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarNotaDebitoResponse" message="tns:generarNotaDebitoResponse" />
+    </operation>
+    <operation name="generarComunicacionBaja">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarComunicacionBajaRequest" message="tns:generarComunicacionBaja" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarComunicacionBajaResponse" message="tns:generarComunicacionBajaResponse" />
+    </operation>
+    <operation name="generarResumenBoleta">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarResumenBoletaRequest" message="tns:generarResumenBoleta" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarResumenBoletaResponse" message="tns:generarResumenBoletaResponse" />
+    </operation>
+    <operation name="generarNotaCredito">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarNotaCreditoRequest" message="tns:generarNotaCredito" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarNotaCreditoResponse" message="tns:generarNotaCreditoResponse" />
+    </operation>
+    <operation name="generarBoleta">
+      <input wsam:Action="http://wsemision.pe.com/wsemision/generarBoletaRequest" message="tns:generarBoleta" />
+      <output wsam:Action="http://wsemision.pe.com/wsemision/generarBoletaResponse" message="tns:generarBoletaResponse" />
+    </operation>
+  </portType>
+  <binding name="wsemisionPortBinding" type="tns:wsemision">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="generarFactura2">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="generarFactura">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="hello">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="obtenerStatus">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="generarNotaDebito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="generarComunicacionBaja">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="generarResumenBoleta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="generarNotaCredito">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="generarBoleta">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="wsemision">
+    <port name="wsemisionPort" binding="tns:wsemisionPortBinding">
+      <soap:address location="http://192.168.0.100:8080/gepp_emisionelectronicafull/wsemision" />
+    </port>
+  </service>
+</definitions>
